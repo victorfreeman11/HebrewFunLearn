@@ -38,7 +38,7 @@ Progress is stored on that iPad only. After changing `index.html`, bump `VERSION
   The word banks are lists near the thinking games in `index.html`; add rows to extend them.
 - Arcade: Bubble Pop, Memory Match, Monster Feed (feed it only things that start with the letter)
 - Prizes: a gift box every 10 stars opens to a sticker (36 to collect); a sticker scene to arrange them in; an occasional surprise bonus star
-- Parents area behind a PIN (`PARENT_PIN` in `index.html`, currently 1985): progress, nikud on/off, difficulty, reset, delete profile.
+- Parents area behind a PIN that you choose on first entry: progress, nikud on/off, difficulty, reset, delete profile.
   The PIN sits in the page source, so it keeps children out but is not real security.
 - Per child, a parent can switch any section or single game off, and turn all sound off
 - Speech is Hebrew only: if the device has no Hebrew voice the app stays silent
@@ -66,7 +66,7 @@ Profiles, stars and progress are kept, because they are stored on the iPad and n
 
 ## Backup, progress report and mock test
 
-All three are reached from the parents area (the gear, PIN 1985), except the test itself.
+All three are reached from the parents area (the gear, then your PIN), except the test itself.
 
 - **Backup.** "Save backup file" writes one small file with every child's profile. On the iPad it opens the share sheet (Save to Files, Mail, AirDrop); on a PC it downloads. "Restore from a backup file" replaces everything on the device with the file's content, after asking. If the file buttons do not work on a device, "Backup as text" shows the same data as text to copy and paste back.
 - **Progress report.** Minutes in the app for the last 7 days, accuracy per activity, and the history of mock tests with a breakdown by question type.
@@ -79,3 +79,36 @@ In the add / subtract, two-digit, multiplication and missing-number games the ch
 ## Building your own mock test
 
 Parents area > Timed mock tests > Test set-up. Per child: the time (5 to 60 minutes), the difficulty (the child's current level, or fixed easy / medium / hard) and, after ticking "Choose the questions myself", how many questions (0 to 10) come from each of the 18 quiz games, and how many long reading passages (0 to 3, each with its 8 questions kept together). Left unticked, the test is 20 questions: one long passage the child has not read yet, and 12 questions shared equally between the games that are switched on.
+
+## Daily limit and prize cost
+
+- **Daily limit.** Each activity pays stars for 3 rounds a day (parents area > Settings: 1, 2, 3, 5, 10 or no limit). After that the activity still works but neither gives nor takes stars until the next day; a moon replaces the star, and the activity's tile gets a moon badge. A round is one finished unit: a tracing sheet, a rocket landing (5 first-try answers), a story, a long passage, a mock test, a game of memory; in spelling and the nikud lab, five right answers.
+- **Prize cost.** The first gift box comes after 10 stars, the next after 20 more, then 30 more, and so on. The hub shows the progress toward the next one.
+- **Passages and stories pay once.** A long passage or a story gives stars only the first time it is finished. Finished ones are marked green in their menus (passages with the best score, stories with a tick) and can be replayed freely, with no stars gained or lost.
+
+## Content in this version
+
+| Bank | Items |
+|---|---|
+| Long reading passages (8 questions each) | 70 |
+| Stories | 35 |
+| Short reading passages (3 questions each) | 54 |
+| Analogies, single answer | 212 |
+| Analogy pairs | 198 pairs in 24 relations |
+| Sentence completion, one gap | 208 |
+| Sentence completion, two gaps | 178 |
+| Words with pictures | 331 |
+
+Math, shape series, matrices, pattern piece, odd one out, logic, number in a shape and rotation are generated and do not run out.
+All Hebrew text and nikud was written without review by a Hebrew reader and should be proofread.
+
+## Version 1.33
+
+- The app name appears on the profile screen and the main screen. The version number is shown in the parents area, next to "Settings".
+- Every activity has a one-line instruction in Hebrew under the top bar (it follows the "show nikud" setting).
+- Bubble game: the instruction names the letter and the goal (pop 5). On harder levels the letter is given by ear only, but it is always shown when the device has no Hebrew voice or sound is off. The same rule applies to the nikud lab's listening mode.
+- Guessing penalty: mistakes in a row cost 1 star, then 2, then 4 (and 4 for each further one). A right answer starts the count again. This applies to the math and thinking games and to long passages.
+
+## Version 1.34: parents PIN
+
+There is no fixed PIN any more. The first time the parents area is opened, it asks you to choose a 4-digit PIN and enter it twice. "Change the parents PIN" in Settings replaces it. If it is forgotten, "Forgot the PIN?" on the lock screen asks a two-digit multiplication and then lets you choose a new one. The PIN is kept on the device and is not part of a backup.
