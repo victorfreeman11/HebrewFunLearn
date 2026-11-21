@@ -454,7 +454,7 @@ function addStars(n){
   $$(".stars b").forEach(b => { b.textContent = P.stars; });
   if (!off("prizes") && P.stars >= P.giftAt + giftCost()) { P.giftAt += giftCost(); P.gifts++; save(); setTimeout(gift, 1300); }
 }
-const APP_VERSION = "1.34";
+const APP_VERSION = "1.35";
 const brand = size => `<div class="brand" style="font-size:calc(var(--u)*${size})"><i>Hebrew</i><i>Fun</i><i>Learn</i></div>`;
 const mission = (t, id) => `<div class="mission he"${id ? ` id="${id}"` : ""}>${t ? nk(t) : ""}</div>`;       // one line saying what to do, on every activity
 const canHear = () => !!voice && !(P && P.mute);              // without a Hebrew voice, nothing may depend on listening
@@ -2558,7 +2558,7 @@ function parents(){
         <p>Difficulty <select id="df">${["Automatic","Easy","Medium","Hard"].map((t, i) => `<option value="${i}" ${P.difficulty === i ? "selected" : ""}>${t}</option>`).join("")}</select></p>
         ${voice ? "" : `<p style="color:#b3261e">No Hebrew voice found on this device, so speech is off (the app never reads Hebrew with another language's voice). On iPad: Settings › Accessibility › Spoken Content › Voices › Hebrew. On Windows: Settings › Time &amp; language › Speech › add Hebrew.</p>`}
         <p><button class="t" id="chpin">Change the parents PIN</button></p>
-        <p><button class="t danger" id="reset">Reset progress</button> <button class="t danger" id="del">Delete this profile</button></p></div>
+        <p><button class="t danger" id="reset">Reset progress and prizes</button> <button class="t danger" id="del">Delete this profile</button></p></div>
       <div class="sec card" id="backup"><h2>Backup (all children on this device)</h2>
         <p style="${stale ? "color:#b3261e" : ""}">Last backup: ${db.backupAt ? new Date(db.backupAt).toLocaleDateString() : "never"}. Progress is stored only on this device, so save a backup now and then.</p>
         <p><button class="t" id="bsave">Save backup file</button> <button class="t" id="bload">Restore from a backup file</button> <button class="t" id="btext">Backup as text</button>
@@ -2576,7 +2576,7 @@ function parents(){
   $("#df").addEventListener("change", e => { P.difficulty = +e.target.value; save(); parents(); });
   $("#rg").addEventListener("change", e => { P.repGoal = +e.target.value; save(); parents(); });
   on(".rl", el => { const l = el.dataset.l; if (confirm(`Reset the tracing count for ${l}?`)) { delete P.reps["print:" + l]; delete P.reps["ktav:" + l]; save(); parents(); } });
-  on("#reset", () => { if (confirm(`Erase all stars and learning progress for ${P.name}?`)) { P.stars = 0; P.best = 0; P.streak = 0; P.mastery = {}; P.reps = {}; P.read = {}; P.days = {}; P.tests = []; P.day = {d: "", n: {}}; P.gifts = 0; P.giftAt = 0; P.seen = {}; save(); parents(); } });
+  on("#reset", () => { if (confirm(`Erase all stars, prizes (stickers and the sticker picture) and learning progress for ${P.name}?`)) { P.stickers = []; P.scene = {bg: 0, items: []}; P.stars = 0; P.best = 0; P.streak = 0; P.mastery = {}; P.reps = {}; P.read = {}; P.days = {}; P.tests = []; P.day = {d: "", n: {}}; P.gifts = 0; P.giftAt = 0; P.seen = {}; save(); parents(); } });
   $("#tm").addEventListener("change", e => { P.testMin = +e.target.value; save(); });
   $("#tl").addEventListener("change", e => { P.test.lv = +e.target.value; save(); });
   const mixTotal = () => { const n = TEST_KINDS.reduce((a, k) => a + (k === "longread" ? Math.min(LONG_MAX, P.test.mix[k] || 0) * LONG_QS : P.test.mix[k] || 0), 0); $("#ttot").textContent = n ? n + " questions" : "0 questions, so the automatic 20 are used"; }; mixTotal();
